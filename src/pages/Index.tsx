@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import MusicPlayer from '@/components/MusicPlayer';
 
 interface Album {
   id: number;
@@ -12,6 +13,15 @@ interface Album {
   genre: string;
   cover: string;
   description: string;
+  tracks: Track[];
+}
+
+interface Track {
+  id: number;
+  title: string;
+  artist: string;
+  duration: string;
+  cover: string;
 }
 
 const albums: Album[] = [
@@ -22,7 +32,12 @@ const albums: Album[] = [
     year: 2024,
     genre: 'Electronic',
     cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg',
-    description: 'Путешествие через звёзды и галактики в ритме электронной музыки'
+    description: 'Путешествие через звёзды и галактики в ритме электронной музыки',
+    tracks: [
+      { id: 1, title: 'Галактический старт', artist: 'Nebula Sound', duration: '3:45', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg' },
+      { id: 2, title: 'Орбита мечты', artist: 'Nebula Sound', duration: '4:12', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg' },
+      { id: 3, title: 'Звёздная пыль', artist: 'Nebula Sound', duration: '3:58', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg' }
+    ]
   },
   {
     id: 2,
@@ -31,7 +46,12 @@ const albums: Album[] = [
     year: 2024,
     genre: 'Chill',
     cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg',
-    description: 'Расслабляющие треки для летних закатов и теплых вечеров'
+    description: 'Расслабляющие треки для летних закатов и теплых вечеров',
+    tracks: [
+      { id: 4, title: 'Закат на пляже', artist: 'Sunset Dreams', duration: '3:22', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg' },
+      { id: 5, title: 'Тёплый бриз', artist: 'Sunset Dreams', duration: '4:05', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg' },
+      { id: 6, title: 'Океанские волны', artist: 'Sunset Dreams', duration: '3:47', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg' }
+    ]
   },
   {
     id: 3,
@@ -40,7 +60,12 @@ const albums: Album[] = [
     year: 2023,
     genre: 'Hip-Hop',
     cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg',
-    description: 'Энергия мегаполиса в каждой ноте, биты улиц большого города'
+    description: 'Энергия мегаполиса в каждой ноте, биты улиц большого города',
+    tracks: [
+      { id: 7, title: 'Неоновые огни', artist: 'Urban Beats', duration: '3:33', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg' },
+      { id: 8, title: 'Пульс мегаполиса', artist: 'Urban Beats', duration: '4:18', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg' },
+      { id: 9, title: 'Улицы в огнях', artist: 'Urban Beats', duration: '3:55', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/9074bf05-c15d-4bd5-8efa-9deff058aa85.jpg' }
+    ]
   },
   {
     id: 4,
@@ -49,12 +74,18 @@ const albums: Album[] = [
     year: 2024,
     genre: 'Synthwave',
     cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg',
-    description: 'Ретро-футуристические звуки 80-х в современной обработке'
+    description: 'Ретро-футуристические звуки 80-х в современной обработке',
+    tracks: [
+      { id: 10, title: 'Киберпанк 2084', artist: 'Synth Wave', duration: '4:28', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg' },
+      { id: 11, title: 'Neon Dreams', artist: 'Synth Wave', duration: '3:52', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg' },
+      { id: 12, title: 'Ретро будущее', artist: 'Synth Wave', duration: '4:15', cover: 'https://cdn.poehali.dev/projects/8a87377e-a6b9-4d69-8118-2d633e6b7c58/files/fbe61ce2-b21f-4bc8-bbdb-7a3712b95731.jpg' }
+    ]
   }
 ];
 
 export default function Index() {
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
 
   return (
     <div className="min-h-screen bg-background" style={{ fontFamily: 'Inter, sans-serif' }}>
@@ -115,7 +146,16 @@ export default function Index() {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                  <Button size="sm" className="bg-white text-black hover:bg-white/90">
+                  <Button 
+                    size="sm" 
+                    className="bg-white text-black hover:bg-white/90"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (album.tracks.length > 0) {
+                        setCurrentTrack(album.tracks[0]);
+                      }
+                    }}
+                  >
                     <Icon name="Play" className="h-4 w-4" />
                   </Button>
                 </div>
@@ -164,10 +204,37 @@ export default function Index() {
                     </h2>
                     <p className="text-xl text-foreground/80 mb-4">{selectedAlbum.artist}</p>
                     <p className="text-foreground/60 mb-4">{selectedAlbum.description}</p>
-                    <p className="text-sm text-foreground/50">Год выпуска: {selectedAlbum.year}</p>
+                    <p className="text-sm text-foreground/50 mb-4">Год выпуска: {selectedAlbum.year}</p>
+                    
+                    <div className="space-y-2 max-h-48 overflow-y-auto">
+                      <h3 className="text-sm font-semibold text-foreground/80 mb-2">Треки:</h3>
+                      {selectedAlbum.tracks.map((track, index) => (
+                        <div 
+                          key={track.id}
+                          className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 cursor-pointer group transition-colors"
+                          onClick={() => setCurrentTrack(track)}
+                        >
+                          <span className="text-xs text-foreground/40 w-4">{index + 1}</span>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium truncate">{track.title}</p>
+                          </div>
+                          <span className="text-xs text-foreground/40">{track.duration}</span>
+                          <Button size="sm" variant="ghost" className="opacity-0 group-hover:opacity-100">
+                            <Icon name="Play" className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="flex gap-3 mt-6">
-                    <Button className="flex-1 bg-gradient-to-r from-gradient-purple to-gradient-pink hover:opacity-90">
+                    <Button 
+                      className="flex-1 bg-gradient-to-r from-gradient-purple to-gradient-pink hover:opacity-90"
+                      onClick={() => {
+                        if (selectedAlbum.tracks.length > 0) {
+                          setCurrentTrack(selectedAlbum.tracks[0]);
+                        }
+                      }}
+                    >
                       <Icon name="Play" className="mr-2 h-4 w-4" />
                       Слушать
                     </Button>
@@ -204,6 +271,8 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      <MusicPlayer track={currentTrack} onClose={() => setCurrentTrack(null)} />
     </div>
   );
 }
